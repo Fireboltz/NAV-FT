@@ -145,7 +145,7 @@ class _Login extends State<Login> {
                               },
                               child: Center(
                                 child: Text(
-                                  'SIGNIN',
+                                  'SIGN IN',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: 'Poppins-Bold',
