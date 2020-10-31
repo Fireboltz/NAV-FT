@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:navft/questionnaire/screens/home_screen.dart';
 
 import '../main.dart';
 import 'design_course_app_theme.dart';
 import 'models/category.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class PopularCourseListView extends StatefulWidget {
   const PopularCourseListView({Key key, this.callBack}) : super(key: key);
@@ -16,6 +19,7 @@ class PopularCourseListView extends StatefulWidget {
 class _PopularCourseListViewState extends State<PopularCourseListView>
     with TickerProviderStateMixin {
   AnimationController animationController;
+
   @override
   void initState() {
     animationController = AnimationController(
@@ -80,18 +84,18 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
 }
 
 class CategoryView extends StatelessWidget {
-  const CategoryView(
-      {Key key,
-      this.category,
-      this.animationController,
-      this.animation,
-      this.callback})
+  const CategoryView({Key key,
+    this.category,
+    this.animationController,
+    this.animation,
+    this.callback})
       : super(key: key);
 
   final VoidCallback callback;
   final Category category;
   final AnimationController animationController;
   final Animation<dynamic> animation;
+  final databaseReference = Firestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -106,10 +110,14 @@ class CategoryView extends StatelessWidget {
             child: InkWell(
               splashColor: Colors.transparent,
               onTap: () {
-                if (this.category.title=="Pending Inspections List") {
+                if (this.category.title == "Pending Inspections List") {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => HomeScreen()));
-                } else {
+                } else
+                if (this.category.title == "Register new Vehicle Manually") {
+                  createRecord("vechile_3");
+                }
+                else {
                   callback();
                 }
               },
@@ -171,11 +179,11 @@ class CategoryView extends StatelessWidget {
                     Container(
                       child: Padding(
                         padding:
-                            const EdgeInsets.only(top: 24, right: 16, left: 16),
+                        const EdgeInsets.only(top: 24, right: 16, left: 16),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(16.0)),
+                            const BorderRadius.all(Radius.circular(16.0)),
                             boxShadow: <BoxShadow>[
                               BoxShadow(
                                   color: DesignCourseAppTheme.grey
@@ -186,7 +194,7 @@ class CategoryView extends StatelessWidget {
                           ),
                           child: ClipRRect(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(16.0)),
+                            const BorderRadius.all(Radius.circular(16.0)),
                             child: AspectRatio(
                                 aspectRatio: 1.28,
                                 child: Image.asset(category.imagePath)),
@@ -202,5 +210,31 @@ class CategoryView extends StatelessWidget {
         );
       },
     );
+  }
+
+
+  void createRecord(String vechile) async {
+    DocumentReference ref = await databaseReference.collection(vechile)
+        .add({
+      "body":"body",
+      "break":"break",
+      "chassisEmbossing":"chassisEmbossing",
+      "electricals":"elec",
+      "horn":"horn",
+      "location": GeoPoint(-80,80),
+      "painting":"painting",
+      "pollution":"pollution",
+      "roadTest":"roadtest",
+      "safetyBelts":"SafteyBelt",
+      "signals":"signals",
+      "speedometer":"speedometer",
+      "steering":"steering",
+      "suspension":"suspension",
+      "steering":"steering",
+      "time":Timestamp(1000,2000),
+      "tyres":"tyres",
+      "wiper":"wiper"
+    });
+    print(ref.documentID);
   }
 }
