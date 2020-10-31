@@ -9,7 +9,9 @@ import 'design_course_app_theme.dart';
 import 'models/category.dart';
 
 class PopularCourseListView extends StatefulWidget {
-  const PopularCourseListView({Key key, this.callBack, this.list, this.listQues }) : super(key: key);
+  const PopularCourseListView(
+      {Key key, this.callBack, this.list, this.listQues})
+      : super(key: key);
   final int list;
   final List<Questionnaire> listQues;
   final Function callBack;
@@ -42,7 +44,9 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
           if (!snapshot.hasData) {
             return const SizedBox();
           } else {
-            var lst = widget.list == 1 ? Category.surveys : Category.popularCourseList;
+            var lst = widget.list == 1
+                ? Category.surveys
+                : Category.popularCourseList;
             return GridView(
               padding: const EdgeInsets.all(8),
               physics: const BouncingScrollPhysics(),
@@ -150,8 +154,102 @@ class CategoryView extends StatelessWidget {
                   quizPage(listQues[14], context);
                 } else if (this.category.title == "Emergency Information") {
                   quizPage(listQues[15], context);
-                }
-                else {
+                } else if (this.category.title == "Engine") {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        final Noiselevel = TextEditingController();
+                        return AlertDialog(
+                          title: Text("What is the noise level?"),
+                          content: new Row(
+                            children: <Widget>[
+                              new Expanded(
+                                child: new TextField(
+                                  controller: Noiselevel,
+                                  decoration:
+                                      InputDecoration(hintText: 'xx DB'),
+                                ),
+                              )
+                            ],
+                          ),
+                          actions: <Widget>[
+                            new FlatButton(
+                                child: const Text('CANCEL'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                            new FlatButton(
+                                child: const Text('Submit'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                })
+                          ],
+                        );
+                      });
+                } else if (this.category.title == "Embossing") {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        final embossing = TextEditingController();
+                        return AlertDialog(
+                          title: Text("How well is the ebossing done?"),
+                          content: new Row(
+                            children: <Widget>[
+                              new Expanded(
+                                child: new TextField(
+                                  controller: embossing,
+                                  decoration:
+                                      InputDecoration(hintText: 'In Brief'),
+                                ),
+                              )
+                            ],
+                          ),
+                          actions: <Widget>[
+                            new FlatButton(
+                                child: const Text('CANCEL'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                            new FlatButton(
+                                child: const Text('Submit'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                })
+                          ],
+                        );
+                      });
+                } else if (this.category.title == "Pollution") {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        final Pollution_level = TextEditingController();
+                        return AlertDialog(
+                          title: Text("How well is the ebossing done?"),
+                          content: new Row(
+                            children: <Widget>[
+                              new Expanded(
+                                child: new TextField(
+                                    controller: Pollution_level,
+                                    decoration:
+                                        InputDecoration(hintText: 'In Brief')),
+                              )
+                            ],
+                          ),
+                          actions: <Widget>[
+                            new FlatButton(
+                                child: const Text('CANCEL'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                            new FlatButton(
+                                child: const Text('Submit'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                })
+                          ],
+                        );
+                      });
+                } else {
                   callback();
                 }
               },
