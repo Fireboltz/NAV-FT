@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../main.dart';
+import '../models/answer.dart';
+import '../models/category.dart';
+import '../models/interpretation.dart';
+import '../models/question.dart';
+import '../models/questionnaire.dart';
 import 'design_course_app_theme.dart';
-import 'models/category.dart';
+import 'questionnaire_screen.dart';
 
 class PopularCourseListView extends StatefulWidget {
   const PopularCourseListView({Key key, this.callBack}) : super(key: key);
@@ -105,7 +110,25 @@ class CategoryView extends StatelessWidget {
             child: InkWell(
               splashColor: Colors.transparent,
               onTap: () {
-                callback();
+                if(this.category.title=="Pending Inspections List")
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          QuestionnaireScreen(
+                              questionnaire: Questionnaire(
+                                  name: "Pending Test", interpretations: [
+                                Interpretation(score: 1, text: "Test Passed")
+                              ], questions: [
+                                Question(text: "Is the test done properly", answers: [Answer(score: 0 ,text: "No"),Answer(score: 1 ,text: "Yes")]),
+                                Question(text: "Is the test done properly", answers: [Answer(score: 0 ,text: "No"),Answer(score: 1 ,text: "Yes")]),
+                                Question(text: "Is the test done properly", answers: [Answer(score: 0 ,text: "No"),Answer(score: 1 ,text: "Yes")]),
+                                Question(text: "Is the test done properly", answers: [Answer(score: 0 ,text: "No"),Answer(score: 1 ,text: "Yes")]),
+                                Question(text: "Is the test done properly", answers: [Answer(score: 0 ,text: "No"),Answer(score: 1 ,text: "Yes")]),
+                              ], instructions: "Please select the right options"
+                              )
+                          ),
+                    ),
+                  );
               },
               child: SizedBox(
                 height: 280,

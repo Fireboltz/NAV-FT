@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../design_course/home_design_course.dart';
-import './Widgets/FormCard.dart';
+import 'package:navft/Widgets/FormCard.dart';
+import 'home_design_course.dart';
 
 class Login extends StatefulWidget {
   @override
