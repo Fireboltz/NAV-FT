@@ -160,6 +160,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.5"
+  flutter_mobile_vision:
+    dependency: "direct main"
+    description:
+      name: flutter_mobile_vision
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4+1"
   flutter_screenutil:
     dependency: "direct main"
     description:

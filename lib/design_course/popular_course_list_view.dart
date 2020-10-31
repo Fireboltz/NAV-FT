@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:navft/ocr/ocr.dart';
 import 'package:navft/questionnaire/enums/questionnaire_type.dart';
 import 'package:navft/questionnaire/models/questionnaire.dart';
 import 'package:navft/questionnaire/screens/home_screen.dart';
@@ -109,7 +110,7 @@ class CategoryView extends StatelessWidget {
   final Animation<dynamic> animation;
   final String reg;
   final String doc;
-  
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -289,6 +290,9 @@ class CategoryView extends StatelessWidget {
                           ],
                         );
                       });
+                } else if (this.category.title == "Register Vehicle Via Image"){
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => OCRPage()));
                 } else {
                   callback();
                 }
