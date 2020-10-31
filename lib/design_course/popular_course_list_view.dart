@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navft/questionnaire/screens/home_screen.dart';
 
 import '../main.dart';
 import 'design_course_app_theme.dart';
@@ -105,7 +106,12 @@ class CategoryView extends StatelessWidget {
             child: InkWell(
               splashColor: Colors.transparent,
               onTap: () {
-                callback();
+                if (this.category.title=="Pending Inspections List") {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                } else {
+                  callback();
+                }
               },
               child: SizedBox(
                 height: 280,
