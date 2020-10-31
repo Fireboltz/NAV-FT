@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "742098551792",
+    "firebase_url": "https://navft-353d2.firebaseio.com",
+    "project_id": "navft-353d2",
+    "storage_bucket": "navft-353d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:742098551792:android:ca83c666fafa5b81c31335",
+        "android_client_info": {
+          "package_name": "org.fireboltz.navft"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "742098551792-phocj8gft57tbgtebkiqkn8qg7229j2n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVhUnA-eTZB80yP_HqTYCdO41rbyZ_G9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "742098551792-phocj8gft57tbgtebkiqkn8qg7229j2n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
