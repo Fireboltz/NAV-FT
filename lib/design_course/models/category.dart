@@ -11,11 +11,11 @@ class Category {
   static List<Category> popularCourseList = <Category>[
     Category(
       imagePath: 'assets/design_course/interFace3.png',
-      title: 'Register new Vehicle Manually',
+      title: 'Register Vehicle Manually',
     ),
     Category(
       imagePath: 'assets/design_course/interFace4.png',
-      title: 'Register New Vehicle Via Image',
+      title: 'Register Vehicle Via Image',
     ),
     Category(
       imagePath: 'assets/design_course/interFace3.png',
