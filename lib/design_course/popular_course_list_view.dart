@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:navft/questionnaire/enums/questionnaire_type.dart';
+import 'package:navft/questionnaire/models/questionnaire.dart';
 import 'package:navft/questionnaire/screens/home_screen.dart';
+import 'package:navft/questionnaire/screens/questionnaire_screen.dart';
 
 import '../main.dart';
 import 'design_course_app_theme.dart';
 import 'models/category.dart';
 
 class PopularCourseListView extends StatefulWidget {
-  const PopularCourseListView({Key key, this.callBack}) : super(key: key);
-
+  const PopularCourseListView({Key key, this.callBack, this.list, this.listQues }) : super(key: key);
+  final int list;
+  final List<Questionnaire> listQues;
   final Function callBack;
   @override
   _PopularCourseListViewState createState() => _PopularCourseListViewState();
@@ -38,14 +42,15 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
           if (!snapshot.hasData) {
             return const SizedBox();
           } else {
+            var lst = widget.list == 1 ? Category.surveys : Category.popularCourseList;
             return GridView(
               padding: const EdgeInsets.all(8),
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.vertical,
               children: List<Widget>.generate(
-                Category.popularCourseList.length,
+                lst.length,
                 (int index) {
-                  final int count = Category.popularCourseList.length;
+                  final int count = lst.length;
                   final Animation<double> animation =
                       Tween<double>(begin: 0.0, end: 1.0).animate(
                     CurvedAnimation(
@@ -59,7 +64,8 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
                     callback: () {
                       widget.callBack();
                     },
-                    category: Category.popularCourseList[index],
+                    listQues: widget.listQues,
+                    category: lst[index],
                     animation: animation,
                     animationController: animationController,
                   );
@@ -82,6 +88,7 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
 class CategoryView extends StatelessWidget {
   const CategoryView(
       {Key key,
+      this.listQues,
       this.category,
       this.animationController,
       this.animation,
@@ -89,6 +96,7 @@ class CategoryView extends StatelessWidget {
       : super(key: key);
 
   final VoidCallback callback;
+  final List<Questionnaire> listQues;
   final Category category;
   final AnimationController animationController;
   final Animation<dynamic> animation;
@@ -106,10 +114,44 @@ class CategoryView extends StatelessWidget {
             child: InkWell(
               splashColor: Colors.transparent,
               onTap: () {
-                if (this.category.title=="Pending Inspections List") {
+                print(listQues);
+                if (this.category.title == "Pending Inspections List") {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => HomeScreen()));
-                } else {
+                } else if (this.category.title == "Tyres") {
+                  quizPage(listQues[0], context);
+                } else if (this.category.title == "Steering") {
+                  quizPage(listQues[1], context);
+                } else if (this.category.title == "Suspension") {
+                  quizPage(listQues[2], context);
+                } else if (this.category.title == "Horn") {
+                  quizPage(listQues[3], context);
+                } else if (this.category.title == "Brake") {
+                  quizPage(listQues[4], context);
+                } else if (this.category.title == "Lamps and Signals") {
+                  quizPage(listQues[5], context);
+                } else if (this.category.title == "Speedometer") {
+                  quizPage(listQues[6], context);
+                } else if (this.category.title == "Painting") {
+                  quizPage(listQues[7], context);
+                } else if (this.category.title == "Wiper") {
+                  quizPage(listQues[8], context);
+                } else if (this.category.title == "Body") {
+                  quizPage(listQues[9], context);
+                } else if (this.category.title == "Electricals") {
+                  quizPage(listQues[10], context);
+                } else if (this.category.title == "Finishing") {
+                  quizPage(listQues[11], context);
+                } else if (this.category.title == "Road Test") {
+                  quizPage(listQues[12], context);
+                } else if (this.category.title == "Safety Glasses") {
+                  quizPage(listQues[13], context);
+                } else if (this.category.title == "Seat Belts") {
+                  quizPage(listQues[14], context);
+                } else if (this.category.title == "Emergency Information") {
+                  quizPage(listQues[15], context);
+                }
+                else {
                   callback();
                 }
               },
@@ -201,6 +243,16 @@ class CategoryView extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  void quizPage(Questionnaire listQues, BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => QuestionnaireScreen(
+          questionnaire: listQues,
+        ),
+      ),
     );
   }
 }
