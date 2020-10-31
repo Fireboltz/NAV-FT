@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navft/ocr/ocr.dart';
 import 'package:navft/questionnaire/enums/questionnaire_type.dart';
 import 'package:navft/questionnaire/models/questionnaire.dart';
 import 'package:navft/questionnaire/screens/home_screen.dart';
@@ -150,6 +151,10 @@ class CategoryView extends StatelessWidget {
                   quizPage(listQues[14], context);
                 } else if (this.category.title == "Emergency Information") {
                   quizPage(listQues[15], context);
+                }
+                else if (this.category.title == "Register New Vehicle Via Image"){
+                Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => OCRPage()));
                 }
                 else {
                   callback();
