@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:navft/questionnaire/enums/questionnaire_type.dart';
 import 'package:navft/questionnaire/models/questionnaire.dart';
@@ -9,10 +10,12 @@ import 'design_course_app_theme.dart';
 import 'models/category.dart';
 
 class PopularCourseListView extends StatefulWidget {
-  const PopularCourseListView({Key key, this.callBack, this.list, this.listQues }) : super(key: key);
+  const PopularCourseListView({Key key, this.callBack, this.list, this.listQues, this.reg, this.doc }) : super(key: key);
   final int list;
   final List<Questionnaire> listQues;
   final Function callBack;
+  final String reg;
+  final String doc;
   @override
   _PopularCourseListViewState createState() => _PopularCourseListViewState();
 }
@@ -67,6 +70,8 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
                     listQues: widget.listQues,
                     category: lst[index],
                     animation: animation,
+                    reg: widget.reg,
+                    doc: widget.doc,
                     animationController: animationController,
                   );
                 },
@@ -92,6 +97,8 @@ class CategoryView extends StatelessWidget {
       this.category,
       this.animationController,
       this.animation,
+      this.reg,
+      this.doc,
       this.callback})
       : super(key: key);
 
@@ -100,7 +107,9 @@ class CategoryView extends StatelessWidget {
   final Category category;
   final AnimationController animationController;
   final Animation<dynamic> animation;
-
+  final String reg;
+  final String doc;
+  
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -115,43 +124,172 @@ class CategoryView extends StatelessWidget {
               splashColor: Colors.transparent,
               onTap: () {
                 print(listQues);
-                if (this.category.title == "Pending Inspections List") {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
-                } else if (this.category.title == "Tyres") {
-                  quizPage(listQues[0], context);
+                if (this.category.title == "Tyres") {
+                  quizPage(listQues[0], context, reg, doc);
                 } else if (this.category.title == "Steering") {
-                  quizPage(listQues[1], context);
+                  quizPage(listQues[1], context, reg, doc);
                 } else if (this.category.title == "Suspension") {
-                  quizPage(listQues[2], context);
+                  quizPage(listQues[2], context, reg, doc);
                 } else if (this.category.title == "Horn") {
-                  quizPage(listQues[3], context);
+                  quizPage(listQues[3], context, reg, doc);
                 } else if (this.category.title == "Brake") {
-                  quizPage(listQues[4], context);
+                  quizPage(listQues[4], context, reg, doc);
                 } else if (this.category.title == "Lamps and Signals") {
-                  quizPage(listQues[5], context);
+                  quizPage(listQues[5], context, reg, doc);
                 } else if (this.category.title == "Speedometer") {
-                  quizPage(listQues[6], context);
+                  quizPage(listQues[6], context, reg, doc);
                 } else if (this.category.title == "Painting") {
-                  quizPage(listQues[7], context);
+                  quizPage(listQues[7], context, reg, doc);
                 } else if (this.category.title == "Wiper") {
-                  quizPage(listQues[8], context);
+                  quizPage(listQues[8], context, reg, doc);
                 } else if (this.category.title == "Body") {
-                  quizPage(listQues[9], context);
+                  quizPage(listQues[9], context, reg, doc);
                 } else if (this.category.title == "Electricals") {
-                  quizPage(listQues[10], context);
+                  quizPage(listQues[10], context, reg, doc);
                 } else if (this.category.title == "Finishing") {
-                  quizPage(listQues[11], context);
+                  quizPage(listQues[11], context, reg, doc);
                 } else if (this.category.title == "Road Test") {
-                  quizPage(listQues[12], context);
+                  quizPage(listQues[12], context, reg, doc);
                 } else if (this.category.title == "Safety Glasses") {
-                  quizPage(listQues[13], context);
+                  quizPage(listQues[13], context, reg, doc);
                 } else if (this.category.title == "Seat Belts") {
-                  quizPage(listQues[14], context);
+                  quizPage(listQues[14], context, reg, doc);
                 } else if (this.category.title == "Emergency Information") {
-                  quizPage(listQues[15], context);
-                }
-                else {
+                  quizPage(listQues[15], context, reg, doc);
+                } else if (this.category.title == "Register Vehicle Manually") {
+                  TextEditingController _tx = new TextEditingController();
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("Enter the number plate of the vehicle without spaces"),
+                          content: new Row(
+                            children: <Widget>[
+                              new Expanded(
+                                child: new TextField(
+                                  controller: _tx,
+                                  decoration: InputDecoration(hintText: 'XXXXXXXXXX'),
+                                ),
+                              )
+                            ],
+                          ),
+                          actions: <Widget>[
+                            new FlatButton(
+                                child: const Text('CANCEL'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                            new FlatButton(
+                                child: const Text('SUBMIT'),
+                                onPressed: () {
+                                  String regNo = _tx.text;
+                                  createCollection(regNo, context);
+                                })
+                          ],
+                        );
+                      });
+                } else if (this.category.title == "Engine") {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        final Noiselevel = TextEditingController();
+                        return AlertDialog(
+                          title: Text("What is the noise level?"),
+                          content: new Row(
+                            children: <Widget>[
+                              new Expanded(
+                                child: new TextField(
+                                  controller: Noiselevel,
+                                  decoration:
+                                  InputDecoration(hintText: 'xx DB'),
+                                ),
+                              )
+                            ],
+                          ),
+                          actions: <Widget>[
+                            new FlatButton(
+                                child: const Text('CANCEL'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                            new FlatButton(
+                                child: const Text('SUBMIT'),
+                                onPressed: () {
+                                  String res = Noiselevel.text;
+                                  createRecord(reg, doc, res, "Engine Noise Level");
+                                  Navigator.pop(context);
+                                })
+                          ],
+                        );
+                      });
+                } else if (this.category.title == "Embossing") {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        final embossing = TextEditingController();
+                        return AlertDialog(
+                          title: Text("How well is the embossing done?"),
+                          content: new Row(
+                            children: <Widget>[
+                              new Expanded(
+                                child: new TextField(
+                                  controller: embossing,
+                                  decoration:
+                                  InputDecoration(hintText: 'In Brief'),
+                                ),
+                              )
+                            ],
+                          ),
+                          actions: <Widget>[
+                            new FlatButton(
+                                child: const Text('CANCEL'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                            new FlatButton(
+                                child: const Text('SUBMIT'),
+                                onPressed: () {
+                                  String res = embossing.text;
+                                  createRecord(reg, doc, res, "Embossing");
+                                  Navigator.pop(context);
+                                })
+                          ],
+                        );
+                      });
+                } else if (this.category.title == "Pollution") {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        final Pollution_level = TextEditingController();
+                        return AlertDialog(
+                          title: Text("How well is the embossing done?"),
+                          content: new Row(
+                            children: <Widget>[
+                              new Expanded(
+                                child: new TextField(
+                                    controller: Pollution_level,
+                                    decoration:
+                                    InputDecoration(hintText: 'In Brief')),
+                              )
+                            ],
+                          ),
+                          actions: <Widget>[
+                            new FlatButton(
+                                child: const Text('CANCEL'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                            new FlatButton(
+                                child: const Text('SUBMIT'),
+                                onPressed: () {
+                                  String res = Pollution_level.text;
+                                  createRecord(reg, doc, res, "Pollution Level");
+                                  Navigator.pop(context);
+                                })
+                          ],
+                        );
+                      });
+                } else {
                   callback();
                 }
               },
@@ -246,13 +384,35 @@ class CategoryView extends StatelessWidget {
     );
   }
 
-  void quizPage(Questionnaire listQues, BuildContext context) {
+  void quizPage(Questionnaire listQues, BuildContext context, String reg, String doc) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => QuestionnaireScreen(
           questionnaire: listQues,
+          reg: reg,
+          doc: doc,
         ),
       ),
     );
+  }
+
+  void createCollection(String reg, BuildContext context) async {
+    final databaseReference = Firestore.instance;
+    DocumentReference ref = await databaseReference.collection(reg)
+        .add({
+      "location": GeoPoint(80, 80),
+      "time": Timestamp(100, 100),
+    });
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => HomeScreen(regNo: reg, docID: ref.documentID,)));
+  }
+
+  void createRecord(String reg, String doc, String res, String property) async {
+    final databaseReference = Firestore.instance;
+    await databaseReference.collection(reg)
+        .document(doc)
+        .updateData({
+      property: res,
+    });
   }
 }

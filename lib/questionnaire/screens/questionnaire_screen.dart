@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_buttons/grouped_buttons.dart';
@@ -10,8 +11,10 @@ import 'package:navft/questionnaire/widgets/button.dart';
 
 class QuestionnaireScreen extends StatefulWidget {
   final Questionnaire questionnaire;
+  final String reg;
+  final String doc;
 
-  QuestionnaireScreen({@required this.questionnaire});
+  QuestionnaireScreen({@required this.questionnaire, this.reg, this.doc});
 
   @override
   _QuestionnaireScreenState createState() => _QuestionnaireScreenState();
@@ -165,16 +168,27 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
         questionIndex++;
       });
     } else {
+      String res = getResultInterpretation();
+      createRecord(widget.reg, widget.doc, res);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => ResultScreen(
             questionnaireName: widget.questionnaire.name,
-            interpretation: getResultInterpretation(),
+            interpretation: res,
           ),
         ),
       );
     }
+  }
+
+  void createRecord(String reg, String doc, String res) async {
+    final databaseReference = Firestore.instance;
+    await databaseReference.collection(reg)
+        .document(doc)
+        .updateData({
+        widget.questionnaire.name: res,
+    });
   }
 
   void onBackButtonPressed() {

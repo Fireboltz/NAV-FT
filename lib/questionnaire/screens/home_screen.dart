@@ -6,8 +6,10 @@ import 'package:navft/questionnaire/models/questionnaire.dart';
 import 'package:navft/questionnaire/services/questionnaire_service.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({Key key, this.regNo, this.docID}) : super(key: key);
 
+  final String regNo;
+  final String docID;
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -107,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Flexible(
-            child: PopularCourseListView(list: 1, listQues: questionnaires),
+            child: PopularCourseListView(list: 1, listQues: questionnaires, reg: widget.regNo, doc: widget.docID,),
           )
         ],
       ),
