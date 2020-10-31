@@ -35,6 +35,8 @@ dependencies:
   grouped_buttons: ^1.0.4
   dots_indicator: ^1.1.0
   flutter_launcher_icons: ^0.7.4
+  firebase_auth: ^0.16.0
+  google_sign_in: ^4.4.4
 
 dev_dependencies:
   flutter_test:
