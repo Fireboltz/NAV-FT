@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:navft/design_course/popular_course_list_view.dart';
+import 'package:navft/search/searchres.dart';
 import '../main.dart';
 import 'design_course_app_theme.dart';
 
@@ -9,6 +11,8 @@ class DesignCourseHomeScreen extends StatefulWidget {
 }
 
 class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
+
+  TextEditingController _txt = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +100,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                       child: Container(
                         padding: const EdgeInsets.only(left: 16, right: 16),
                         child: TextFormField(
+                          controller: _txt,
                           style: TextStyle(
                             fontFamily: 'WorkSans',
                             fontWeight: FontWeight.bold,
@@ -125,7 +130,9 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                     SizedBox(
                       width: 60,
                       height: 60,
-                      child: Icon(Icons.search, color: HexColor('#B9BABC')),
+                      child: IconButton(color: HexColor('#B9BABC'), icon: Icon(Icons.search), onPressed: () {
+                        getData(_txt.text);
+                      },),
                     )
                   ],
                 ),
@@ -138,6 +145,18 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
         ],
       ),
     );
+  }
+
+  void getData(String reg) {
+    final databaseReference = Firestore.instance;
+    databaseReference
+        .collection(reg)
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => ListPage(disp: snapshot.documents, reg: reg,)));
+      //snapshot.documents.forEach((f) => f.data.toString()));
+    });
   }
 
   Widget getAppBarUI() {

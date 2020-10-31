@@ -163,7 +163,7 @@ class CategoryView extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text("Enter the number plate of the vehicle without spaces"),
+                          title: Text("Enter the number plate of the vehicle"),
                           content: new Row(
                             children: <Widget>[
                               new Expanded(
