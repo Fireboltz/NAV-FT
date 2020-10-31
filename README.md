@@ -1,16 +1,68 @@
-# navft
+# NAV-FT
+___
+## What does NAV-FT Solve ? :eyes:
 
-A new Flutter application.
+ As per Motor Vehicle act, all commercial vehicles are mandated to undergo fitness test periodically, depending on vehicle age. 
 
-## Getting Started
+ The vehicles are to be brought to designated fitness centers (which are normally one centre per district in most states) for inspection and certification. There are normally long queues and the process is hassle some. An innovative solution is required to ease this process for all.
 
-This project is a starting point for a Flutter application.
+Minimum Desired Outcome: **Fitness test procedure needs to be automated**. The testing is also done transparently. Wherever possible, the parameters are to be tested automatically (obtain the image / video for selected test, analyze and rate the test as pass / fail. For the tests where manual intervention is required (checking the brakes, etc.), the authorized personnel will key-in the details (online). Net results are published only if minimum set of requirements are satisfied. 
+___
+## Technology Stack :star:
 
-A few resources to get you started if this is your first Flutter project:
+* [Flutter](https://flutter.dev/)
+* [Firebase](https://firebase.google.com/)
+* [Tensorflow](https://www.tensorflow.org/)
+* [Docker](https://www.docker.com/)
+* [AWS SageMaker](https://aws.amazon.com/sagemaker/)
+___
+## Vehicle Data and data which are used from Forms
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+These informations are updated and documented well in the [Wiki Page](https://github.com/Fireboltz/NAV-FT/wiki)
+___
+## What all NAV-FT can do ? :thought_balloon:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+NAV-FT contains some of the features that we can use to speed up the process of vehicle fitness testing.
+
+**Register new Vehicle Manually:** 
+
+The RTO officials can manually register the vehicle by filling out and interactive and easy to use form in the application which syncs the data with firebase cloud database in realtime which enables faster registration process.
+
+ **Register new Vehicle Image:**
+
+This feature allows the RTO officials to take the photo of the number-plate and the data will be recognized using OCR and fed into the realtime database of firebase.
+
+**Pending Inspection List:**
+
+This feature provides a list of all the inspection that has to be done in the order the RTO officials does according to RULE 62 of MVD and has all the forms integrated to the application which generally should be filled out by the officials in a table manner which is very difficult and time consuming.
+
+**Completed Inspection List:**
+
+If the Inspection of the Vehicle is already done the fitness certificate is automatically generated and stored in the firebase cloud database. This forms are listed here and can be shared by the RTO officials over the internet to or can be converted to a hardcopy.
+___
+## Innovations
+
+#### Wiper Working Detection:
+
+We have trained a model and interred using tensor-flow lite to take images from the android devices camera and predict if the fully functional or not.
+
+#### Headlamp and Indicator Detection:
+
+Computer vision is used in the application to predict if the headlamp and the indicator of the vehicle including the break-lights are completely in working condition and the data is automatically uploaded into the firebase cloud post-testing.
+
+
+Some of the machine learning models are too heavy for the mobile phone to run locally and we need the User Experience of the app to be very smooth and hence we are have dockside the models and takes advantage of the AWS SageMaker to host the container from which we can do a simple API call to get the inference which can then be used by the Application for the automation of the tests.
+___
+## Screenshots
+___
+# Developers :information_desk_person:
+
+[Abhijit Ramesh](https://github.com/abhijitramesh)
+
+[Yash Khare](https://github.com/yashk2000)
+
+[Vishwaak](https://github.com/Vishwaak)
+
+[Ananthan](https://github.com/ananthanandanan)
+
+[Mayuk](https://github.com/Mayukhdeb)
