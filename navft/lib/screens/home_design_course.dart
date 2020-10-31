@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:navft/design_course/popular_course_list_view.dart';
+import 'package:navft/screens/popular_course_list_view.dart';
 import '../main.dart';
 import 'design_course_app_theme.dart';
 

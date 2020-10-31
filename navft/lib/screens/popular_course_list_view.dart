@@ -1,9 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:navft/enums/questionnaire_type.dart';
+import 'package:navft/models/answer.dart';
+import 'package:navft/models/interpretation.dart';
+import 'package:navft/models/question.dart';
+import 'package:navft/models/questionnaire.dart';
+import 'package:navft/screens/questionnaire_screen.dart';
+import 'package:navft/services/questionnaire_service.dart';
 
 import '../main.dart';
 import 'design_course_app_theme.dart';
-import 'models/category.dart';
-
+import "package:navft/models/category.dart";
 class PopularCourseListView extends StatefulWidget {
   const PopularCourseListView({Key key, this.callBack}) : super(key: key);
 
@@ -27,6 +36,7 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
     return true;
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -48,9 +58,11 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
                   final Animation<double> animation =
                       Tween<double>(begin: 0.0, end: 1.0).animate(
                     CurvedAnimation(
+
                       parent: animationController,
                       curve: Interval((1 / count) * index, 1.0,
                           curve: Curves.fastOutSlowIn),
+
                     ),
                   );
                   animationController.forward();
@@ -62,8 +74,11 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
                     animation: animation,
                     animationController: animationController,
                   );
+
                 },
+
               ),
+
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 32.0,
@@ -84,13 +99,14 @@ class CategoryView extends StatelessWidget {
       this.category,
       this.animationController,
       this.animation,
-      this.callback})
+      this.callback,})
       : super(key: key);
 
   final VoidCallback callback;
   final Category category;
   final AnimationController animationController;
   final Animation<dynamic> animation;
+
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +121,25 @@ class CategoryView extends StatelessWidget {
             child: InkWell(
               splashColor: Colors.transparent,
               onTap: () {
-                callback();
+                if(this.category.title=="Pending Inspections List")
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        QuestionnaireScreen(
+                          questionnaire: Questionnaire(
+                            name: "Pending Test", interpretations: [
+                              Interpretation(score: 1, text: "Test Passed")
+                          ], questions: [
+                            Question(text: "Is the test done properly", answers: [Answer(score: 0 ,text: "No"),Answer(score: 1 ,text: "Yes")]),
+                            Question(text: "Is the test done properly", answers: [Answer(score: 0 ,text: "No"),Answer(score: 1 ,text: "Yes")]),
+                            Question(text: "Is the test done properly", answers: [Answer(score: 0 ,text: "No"),Answer(score: 1 ,text: "Yes")]),
+                            Question(text: "Is the test done properly", answers: [Answer(score: 0 ,text: "No"),Answer(score: 1 ,text: "Yes")]),
+                            Question(text: "Is the test done properly", answers: [Answer(score: 0 ,text: "No"),Answer(score: 1 ,text: "Yes")]),
+                          ], instructions: "Please select the right options"
+                          )
+                        ),
+                  ),
+                );
               },
               child: SizedBox(
                 height: 280,

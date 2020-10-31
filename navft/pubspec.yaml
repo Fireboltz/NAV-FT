@@ -32,6 +32,8 @@ dependencies:
   smooth_star_rating: ^1.1.1
   intl: ^0.16.0
   flutter_screenutil: ^0.5.2
+  grouped_buttons: ^1.0.4
+  dots_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
