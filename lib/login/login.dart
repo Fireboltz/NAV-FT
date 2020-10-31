@@ -141,8 +141,15 @@ class _Login extends State<Login> {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () {
-                                Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => DesignCourseHomeScreen()));
+                                signInWithGoogle().whenComplete(() {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return DesignCourseHomeScreen();
+                                      },
+                                    ),
+                                  );
+                                });
                               },
                               child: Center(
                                 child: Text(

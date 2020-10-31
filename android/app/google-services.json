@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "742098551792-6g8gggdkon40k6bqhja7le34rdp6ch8t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.fireboltz.navft",
+            "certificate_hash": "f536600d581c4cd6ae8a4c3542f509f816088675"
+          }
+        },
+        {
           "client_id": "742098551792-phocj8gft57tbgtebkiqkn8qg7229j2n.apps.googleusercontent.com",
           "client_type": 3
         }
