@@ -1,0 +1,128 @@
+{
+  "name": "Tyres",
+  "instructions": "Please fill in the most appropriate option",
+  "questions": [
+    {
+      "text": "What is the condition of the front right tyre?",
+      "answers": [
+        {
+          "text": "5",
+          "score": 5
+        },
+        {
+          "text": "4",
+          "score": 4
+        },
+        {
+          "text": "3",
+          "score": 3
+        },
+        {
+          "text": "2",
+          "score": 2
+        },
+        {
+          "text": "1",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "What is the condition of the front left tyre?",
+      "answers": [
+        {
+          "text": "5",
+          "score": 5
+        },
+        {
+          "text": "4",
+          "score": 4
+        },
+        {
+          "text": "3",
+          "score": 3
+        },
+        {
+          "text": "2",
+          "score": 2
+        },
+        {
+          "text": "1",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "What is the condition of the rear right tyre?",
+      "answers": [
+        {
+          "text": "5",
+          "score": 5
+        },
+        {
+          "text": "4",
+          "score": 4
+        },
+        {
+          "text": "3",
+          "score": 3
+        },
+        {
+          "text": "2",
+          "score": 2
+        },
+        {
+          "text": "1",
+          "score": 1
+        }
+      ]
+    },
+    {
+      "text": "What is the condition of the rear left tyre?",
+      "answers": [
+        {
+          "text": "5",
+          "score": 5
+        },
+        {
+          "text": "4",
+          "score": 4
+        },
+        {
+          "text": "3",
+          "score": 3
+        },
+        {
+          "text": "2",
+          "score": 2
+        },
+        {
+          "text": "1",
+          "score": 1
+        }
+      ]
+    }
+  ],
+  "interpretations": [
+    {
+      "score": 20,
+      "text": "Excellent"
+    },
+    {
+      "score": 15,
+      "text": "Fine"
+    },
+    {
+      "score": 10,
+      "text": "Maintainance Needed"
+    },
+    {
+      "score": 5,
+      "text": "Immediate Maintainance Needed"
+    },
+    {
+      "score": 0,
+      "text": "Tyres need to be changed immediately"
+    }
+  ]
+}

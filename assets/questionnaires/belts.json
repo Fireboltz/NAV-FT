@@ -1,0 +1,53 @@
+{
+  "name": "Seat Belts",
+  "instructions": "Please fill in the most appropriate option",
+  "questions": [
+    {
+      "text": "What is the condition of the seat belts?",
+      "answers": [
+        {
+          "text": "5",
+          "score": 5
+        },
+        {
+          "text": "4",
+          "score": 4
+        },
+        {
+          "text": "3",
+          "score": 3
+        },
+        {
+          "text": "2",
+          "score": 2
+        },
+        {
+          "text": "1",
+          "score": 1
+        }
+      ]
+    }
+  ],
+  "interpretations": [
+    {
+      "score": 5,
+      "text": "Excellent"
+    },
+    {
+      "score": 4,
+      "text": "Fine"
+    },
+    {
+      "score": 3,
+      "text": "Maintainance Needed"
+    },
+    {
+      "score": 2,
+      "text": "Immediate Maintainance Needed"
+    },
+    {
+      "score": 1,
+      "text": "Tyres need to be changed immediately"
+    }
+  ]
+}
