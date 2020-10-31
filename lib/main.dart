@@ -1,7 +1,10 @@
+import 'dart:developer';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app_theme.dart';
+import 'design_course/home_design_course.dart';
 import 'login/login.dart';
 
 void main() async {
@@ -29,9 +32,28 @@ class MyApp extends StatelessWidget {
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
       ),
-      home: Login(),
+      home: FutureBuilder(
+          builder: (context, AsyncSnapshot<bool> snapshot) {
+            if (snapshot.hasData)
+              return snapshot.data ? DesignCourseHomeScreen() : Login();
+            else
+              return Container();
+          },
+          future: isLoggedIn()),
     );
   }
+
+  Future<bool> isLoggedIn() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    FirebaseUser _user = await _auth.currentUser();
+    log(_user.toString());
+    if (_user == null) {
+      log("NO");
+      return false;
+    }
+  log("YES");
+  return true;
+}
 }
 
 class HexColor extends Color {
