@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app_theme.dart';
-import 'login/login.dart';
+import 'screens/login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
