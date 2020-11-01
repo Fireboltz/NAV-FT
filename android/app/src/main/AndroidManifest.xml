@@ -47,5 +47,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <activity android:name="io.github.edufolly.fluttermobilevision.ocr.OcrCaptureActivity" />
     </application>
 </manifest>
