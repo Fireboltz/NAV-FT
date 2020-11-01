@@ -30,6 +30,10 @@ class Category {
   static List<Category> surveys = <Category>[
     Category(
       imagePath: 'assets/design_course/interFace3.png',
+      title: 'Perform Automated Testing',
+    ),
+    Category(
+      imagePath: 'assets/design_course/interFace3.png',
       title: 'Tyres',
     ),
     Category(

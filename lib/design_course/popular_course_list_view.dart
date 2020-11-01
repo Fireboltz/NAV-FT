@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:navft/design_course/automated.dart';
 import 'package:navft/ocr/ocr.dart';
 import 'package:navft/questionnaire/enums/questionnaire_type.dart';
 import 'package:navft/questionnaire/models/questionnaire.dart';
@@ -157,7 +158,11 @@ class CategoryView extends StatelessWidget {
                   quizPage(listQues[14], context, reg, doc);
                 } else if (this.category.title == "Emergency Information") {
                   quizPage(listQues[15], context, reg, doc);
-                } else if (this.category.title == "Register Vehicle Manually") {
+                } else if (this.category.title == "Perform Automated Testing") {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Automated()));
+                }
+                else if (this.category.title == "Register Vehicle Manually") {
                   TextEditingController _tx = new TextEditingController();
                   showDialog(
                       context: context,
