@@ -52,18 +52,33 @@ Computer vision is used in the application to predict if the headlamp and the in
 
 
 Some of the machine learning models are too heavy for the mobile phone to run locally and we need the User Experience of the app to be very smooth and hence we are have dockside the models and takes advantage of the AWS SageMaker to host the container from which we can do a simple API call to get the inference which can then be used by the Application for the automation of the tests.
+
+#### Data Sync
+
+Data will be synced across all users of the application. Every registered can access the database and search for a vehicle to see when and where did it have it's last survey, and what were the results of those. 
 ___
+
+## How to use the app
+
+- Login into the app by using firebase authentication which optionally uses Google Sign-In as an additional security check
+- You can search for an existing vehicle and view it's past surveys
+- You can manually enter a new vehicle(even if you enter data of a vehicle which is already register, it will work). 
+- You can just click a photo of the vehicle license plate and let the app automatically register the vehicle. 
+- After registration you will directly be led to a the screen with all the surveys that need to be filled. 
+- You can choose the automated surveys to just click and upload photos of the vehicle to the cloud and let the machine learning models do the work, and update the database with the results by itself. 
+- You can choose to do the tests manually as well. 
+
 ## Screenshots
 
 **Dashboard**
 
 | ![1](https://user-images.githubusercontent.com/43090559/97795273-52e6e580-1c2a-11eb-9e98-b3f3e00aa000.jpeg) |
-|---|---|
+|---|
 | The Dashboard with the Features available  |
 **Features**
 
 | ![2](https://user-images.githubusercontent.com/43090559/97795291-89246500-1c2a-11eb-8380-e05cce4e0bf2.jpeg) | ![4](https://user-images.githubusercontent.com/43090559/97795307-b5d87c80-1c2a-11eb-8a5f-8aff18342607.jpeg) |
-|---|---|---|
+|---|---|
 | ![5](https://user-images.githubusercontent.com/43090559/97795315-ce489700-1c2a-11eb-8ff1-be4cbc0c1edf.jpeg) | ![7](https://user-images.githubusercontent.com/43090559/97795322-ddc7e000-1c2a-11eb-8fd3-23278cc08093.jpeg) | 
 
 # Developers :information_desk_person:
