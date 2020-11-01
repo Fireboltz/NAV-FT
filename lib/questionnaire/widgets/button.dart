@@ -18,12 +18,12 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-      color: isPrimary ? Theme.of(context).primaryColor : Theme.of(context).accentColor,
+      color: isPrimary ? Theme.of(context).primaryColor :Color(0xFF767676),
       shape: isPrimary
           ? null
           : RoundedRectangleBorder(
               side: BorderSide(
-                color: Theme.of(context).disabledColor,
+                color: Color(0xFF767676),
               ),
             ),
       child: Text(
@@ -31,7 +31,7 @@ class Button extends StatelessWidget {
         style: isPrimary
             ? TextStyle(
                 fontWeight: FontWeight.w700,
-                color: Theme.of(context).accentColor,
+                color:Color(0xFF17262A),
               )
             : TextStyle(
                 fontWeight: FontWeight.w700,
